@@ -1,14 +1,12 @@
 const inventory = newInventory()
 move(inventory).to(0, 0)
 
-const character = newImage('assets/green-character/static.gif')
-move(character).to(100, 250)
-
 
 const character = newImage('assets/green-character/static.gif')
 let direction = null;
 let x = 100;
 let y = 250;
+move(character).to(100, 250)
 
 function moveCharacter(){ 
     if(direction === 'west'){
@@ -26,6 +24,8 @@ function moveCharacter(){
     character.style.left = x + 'px'
     character.style.bottom = y + 'px'
 }
+
+setInterval(moveCharacter, 1)  
 setInterval(function(){ 
     if(direction === 'west'){
         x = x - 1
@@ -42,6 +42,28 @@ setInterval(function(){
     character.style.left = x + 'px'
     character.style.bottom = y + 'px'
 }, 1)
+
+document.addEventListener('keydown', function(e){
+    if(e.repeat) return;
+
+    if(e.key === 'ArrowLeft'){
+        direction = 'west'
+    }
+    if(e.key === 'ArrowUp'){
+        direction = 'north'
+    }
+    if(e.key === 'ArrowRight'){
+        direction = 'east'
+    }
+    if(e.key === 'ArrowDown'){
+        direction = 'south'
+    }
+})
+document.addEventListener('keyup', function(e){
+    direction = null
+})
+
+
 
 
 move(newImage('assets/tree.png')).to(200, 450)
